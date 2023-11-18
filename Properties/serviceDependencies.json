@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "type": "mssql",
+      "connectionId": "ConnectionStrings:Cucu_Denisa_Flavia_lab2_REFACUTContext"
+    }
+  }
+}
