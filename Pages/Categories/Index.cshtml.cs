@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Cucu_Denisa_Flavia_lab2_REFACUT.Data;
 using Cucu_Denisa_Flavia_lab2_REFACUT.Models;
+using Cucu_Denisa_Flavia_lab2_REFACUT.Models.ViewModels;
 
 namespace Cucu_Denisa_Flavia_lab2_REFACUT.Pages.Categories
 {
@@ -19,15 +20,28 @@ namespace Cucu_Denisa_Flavia_lab2_REFACUT.Pages.Categories
             _context = context;
         }
 
-        public IList<BookCategory> BookCategory { get;set; } = default!;
+        public IList<Category> Category { get; set; }
 
-        public async Task OnGetAsync()
+        public CategoryIndexData CategoryData { get; set; }
+
+        public int CategoryID { get; set; }
+
+        public async Task OnGetAsync(int? id)
         {
-            if (_context.BookCategory != null)
+            CategoryData = new CategoryIndexData();
+            CategoryData.Categories = await _context.Category
+                .Include(c => c.BookCategories)
+                .ThenInclude(c => c.Book)
+                .OrderBy(c => c.CategoryName)
+                .ToListAsync();
+
+            if (id != null)
             {
-                BookCategory = await _context.BookCategory
-                .Include(b => b.Book)
-                .Include(b => b.Category).ToListAsync();
+                CategoryID = id.Value;
+                Category category = CategoryData.Categories
+                    .Where(c => c.ID == id.Value)
+                    .Single();
+                CategoryData.Books = category.BookCategories.Select(bc => bc.Book);
             }
         }
     }
