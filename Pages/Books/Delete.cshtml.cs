@@ -7,10 +7,14 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Cucu_Denisa_Flavia_lab2_REFACUT.Data;
 using Cucu_Denisa_Flavia_lab2_REFACUT.Models;
+using Cucu_Denisa_Flavia_Lab2_1_.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Cucu_Denisa_Flavia_lab2_REFACUT.Pages.Books
 {
-    public class DeleteModel : PageModel
+    [Authorize(Roles = "Admin")]
+
+    public class DeleteModel : BookCategoriesPageModel
     {
         private readonly Cucu_Denisa_Flavia_lab2_REFACUT.Data.Cucu_Denisa_Flavia_lab2_REFACUTContext _context;
 
@@ -18,6 +22,7 @@ namespace Cucu_Denisa_Flavia_lab2_REFACUT.Pages.Books
         {
             _context = context;
         }
+
 
         [BindProperty]
       public Book Book { get; set; } = default!;

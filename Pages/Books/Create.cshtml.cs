@@ -8,16 +8,18 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Cucu_Denisa_Flavia_lab2_REFACUT.Data;
 using Cucu_Denisa_Flavia_lab2_REFACUT.Models;
 using Cucu_Denisa_Flavia_Lab2_1_.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Cucu_Denisa_Flavia_lab2_REFACUT.Pages.Books
 {
+    [Authorize(Roles = "Admin")]
+
     public class CreateModel : BookCategoriesPageModel
     {
         private readonly Cucu_Denisa_Flavia_lab2_REFACUT.Data.Cucu_Denisa_Flavia_lab2_REFACUTContext _context;
-
         public CreateModel(Cucu_Denisa_Flavia_lab2_REFACUT.Data.Cucu_Denisa_Flavia_lab2_REFACUTContext context)
         {
-            _context = context;
+            context = context;
         }
 
         public IActionResult OnGet()

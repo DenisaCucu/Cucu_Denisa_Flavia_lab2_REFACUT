@@ -9,9 +9,11 @@ using Cucu_Denisa_Flavia_lab2_REFACUT.Data;
 using Cucu_Denisa_Flavia_lab2_REFACUT.Models;
 using Cucu_Denisa_Flavia_lab2_REFACUT.Models.ViewModels;
 using Cucu_Denisa_Flavia_lab2_REFACUT.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Cucu_Denisa_Flavia_lab2_REFACUT.Pages.Publishers
 {
+    [Authorize(Roles = "Admin")]
     public class IndexModel : PageModel
     {
         private readonly Cucu_Denisa_Flavia_lab2_REFACUT.Data.Cucu_Denisa_Flavia_lab2_REFACUTContext _context;
