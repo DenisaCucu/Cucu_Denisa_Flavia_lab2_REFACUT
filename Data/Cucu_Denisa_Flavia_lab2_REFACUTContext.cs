@@ -19,5 +19,9 @@ namespace Cucu_Denisa_Flavia_lab2_REFACUT.Data
         public DbSet<Cucu_Denisa_Flavia_lab2_REFACUT.Models.Publisher>? Publisher { get; set; }
 
         public DbSet<Cucu_Denisa_Flavia_lab2_REFACUT.Models.Author>? Author { get; set; }
+
+        public DbSet<Cucu_Denisa_Flavia_lab2_REFACUT.Models.BookCategory>? BookCategory { get; set; }
+        public DbSet<Cucu_Denisa_Flavia_lab2_REFACUT.Models.Category> Category { get; set; }
+
     }
 }

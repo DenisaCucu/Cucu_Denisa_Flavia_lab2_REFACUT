@@ -4,6 +4,7 @@ using Cucu_Denisa_Flavia_lab2_REFACUT.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Cucu_Denisa_Flavia_lab2_REFACUT.Migrations
 {
     [DbContext(typeof(Cucu_Denisa_Flavia_lab2_REFACUTContext))]
-    partial class Cucu_Denisa_Flavia_lab2_REFACUTContextModelSnapshot : ModelSnapshot
+    [Migration("20231119002630_BookCategory2")]
+    partial class BookCategory2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

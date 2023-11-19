@@ -8,11 +8,10 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Cucu_Denisa_Flavia_lab2_REFACUT.Data;
 using Cucu_Denisa_Flavia_lab2_REFACUT.Models;
-using Cucu_Denisa_Flavia_Lab2_1_.Models;
 
-namespace Cucu_Denisa_Flavia_lab2_REFACUT.Pages.Books
+namespace Cucu_Denisa_Flavia_lab2_REFACUT.Pages.Categories
 {
-    public class EditModel : BookCategoriesPageModel
+    public class EditModel : PageModel
     {
         private readonly Cucu_Denisa_Flavia_lab2_REFACUT.Data.Cucu_Denisa_Flavia_lab2_REFACUTContext _context;
 
@@ -22,27 +21,23 @@ namespace Cucu_Denisa_Flavia_lab2_REFACUT.Pages.Books
         }
 
         [BindProperty]
-        public Book Book { get; set; } = default!;
+        public BookCategory BookCategory { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.Book == null)
+            if (id == null || _context.BookCategory == null)
             {
                 return NotFound();
             }
 
-            Book = await _context.Book
-                .Include(b => b.Publisher)
-                .Include(b => b.Author)  // Include Author information
-                .FirstOrDefaultAsync(m => m.ID == id);
-
-            if (Book == null)
+            var bookcategory =  await _context.BookCategory.FirstOrDefaultAsync(m => m.ID == id);
+            if (bookcategory == null)
             {
                 return NotFound();
             }
-
-            ViewData["AuthorID"] = new SelectList(_context.Set<Author>(), "ID", "FullName");
-            ViewData["PublisherID"] = new SelectList(_context.Set<Publisher>(), "ID", "PublisherName");
+            BookCategory = bookcategory;
+           ViewData["BookID"] = new SelectList(_context.Book, "ID", "ID");
+            ViewData["CategoryID"] = new SelectList(_context.Set<Models.Category>(), "ID", "ID");
             return Page();
         }
 
@@ -55,7 +50,7 @@ namespace Cucu_Denisa_Flavia_lab2_REFACUT.Pages.Books
                 return Page();
             }
 
-            _context.Attach(Book).State = EntityState.Modified;
+            _context.Attach(BookCategory).State = EntityState.Modified;
 
             try
             {
@@ -63,7 +58,7 @@ namespace Cucu_Denisa_Flavia_lab2_REFACUT.Pages.Books
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!BookExists(Book.ID))
+                if (!BookCategoryExists(BookCategory.ID))
                 {
                     return NotFound();
                 }
@@ -76,9 +71,9 @@ namespace Cucu_Denisa_Flavia_lab2_REFACUT.Pages.Books
             return RedirectToPage("./Index");
         }
 
-        private bool BookExists(int id)
+        private bool BookCategoryExists(int id)
         {
-          return (_context.Book?.Any(e => e.ID == id)).GetValueOrDefault();
+          return (_context.BookCategory?.Any(e => e.ID == id)).GetValueOrDefault();
         }
     }
 }
