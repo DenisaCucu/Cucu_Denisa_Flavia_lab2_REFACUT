@@ -9,19 +9,27 @@ namespace Cucu_Denisa_Flavia_lab2_REFACUT.Data
 {
     public class Cucu_Denisa_Flavia_lab2_REFACUTContext : DbContext
     {
-        public Cucu_Denisa_Flavia_lab2_REFACUTContext (DbContextOptions<Cucu_Denisa_Flavia_lab2_REFACUTContext> options)
+        public Cucu_Denisa_Flavia_lab2_REFACUTContext(DbContextOptions<Cucu_Denisa_Flavia_lab2_REFACUTContext> options)
             : base(options)
         {
         }
 
         public DbSet<Cucu_Denisa_Flavia_lab2_REFACUT.Models.Book> Book { get; set; } = default!;
-
         public DbSet<Cucu_Denisa_Flavia_lab2_REFACUT.Models.Publisher>? Publisher { get; set; }
-
         public DbSet<Cucu_Denisa_Flavia_lab2_REFACUT.Models.Author>? Author { get; set; }
-
         public DbSet<Cucu_Denisa_Flavia_lab2_REFACUT.Models.BookCategory>? BookCategory { get; set; }
         public DbSet<Cucu_Denisa_Flavia_lab2_REFACUT.Models.Category> Category { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Book>()
+                .HasOne(b => b.Borrowing)
+                .WithOne(b => b.Book)
+                .HasForeignKey<Borrowing>(b => b.BookID);
+        }
+
+        public DbSet<Cucu_Denisa_Flavia_lab2_REFACUT.Models.Member>? Member { get; set; }
+
+        public DbSet<Cucu_Denisa_Flavia_lab2_REFACUT.Models.Borrowing>? Borrowing { get; set; }
     }
 }

@@ -3,6 +3,10 @@
     "mssql1": {
       "type": "mssql.local",
       "connectionId": "ConnectionStrings:Cucu_Denisa_Flavia_lab2_REFACUTContext"
+    },
+    "mssql2": {
+      "type": "mssql.local",
+      "connectionId": "ConnectionStrings:LibraryIdentityContextConnection"
     }
   }
 }
